@@ -29,7 +29,55 @@ Some prompts to answer:
 
 You can include a simple diagram or bullet list if helpful.
 
+Ans: Real recommendation systems use collaborative filtering (based on other users) and content-based filtering (based on song features). In this project, I use a content-based approach.
+
+The system compares user preferences (like genre, mood, and energy) with each song’s features. It assigns a score based on how similar the song is to the user’s preferences. Songs that match more closely get higher scores.
+
+After scoring, the songs are ranked from highest to lowest, and the top songs are recommended.
+
+The system uses features such as genre, mood, energy, and tempo.
+
+For each song, the recommender calculates a score using these rules:
+
+- **+2.0 points** if the song’s **genre** matches the user’s preferred genre  
+- **+1.0 point** if the song’s **mood** matches the user’s preferred mood  
+- **+ similarity points** based on how close the song’s **energy** is to the user’s target energy  
+
+A simple energy similarity formula:
+
+\[
+\text{energy\_similarity} = \max(0,\ 1 - |song\_energy - target\_energy|)
+\]
+
+This gives a value between **0 and 1**:
+- closer energy = higher points  
+- farther energy = lower points  
+
+So the final score is:
+
+\[
+\text{score} = genre\_points + mood\_points + energy\_similarity
+\]
+
+
+### Recommendation Flow
+
+1. The user enters preferences (genre, mood, target energy).
+2. The program loads songs from `songs.csv`.
+3. It loops through every song.
+4. Each song gets a score using the recipe above.
+5. Songs are sorted from highest score to lowest score.
+6. The system returns the **Top K** songs.
+
 ---
+
+### Biases and Limitations
+
+This system is intentionally simple, so it has some limits:
+
+- It may **over-prioritize genre** because genre has the highest fixed points.
+- It can miss songs that match mood/energy well but have a different genre label.
+- It only uses features present in the CSV, so recommendation quality depends on dataset quality and coverage.
 
 ## Getting Started
 
@@ -209,3 +257,6 @@ A few sentences about what you learned:
 - How did building this change how you think about real music recommenders
 - Where do you think human judgment still matters, even if the model seems "smart"
 
+<p>
+  <img src="images/recommendation.png" width="600">
+</p>
