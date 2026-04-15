@@ -257,6 +257,4 @@ A few sentences about what you learned:
 - How did building this change how you think about real music recommenders
 - Where do you think human judgment still matters, even if the model seems "smart"
 
-<p>
-  <img src="images/recommendation.png" width="600">
-</p>
+![Music recommender output](recommendation.png)
